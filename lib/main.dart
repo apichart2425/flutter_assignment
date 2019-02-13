@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './ui/home.dart';
 import './ui/login.dart';
+import './ui/register.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,7 +18,9 @@ class MyApp extends StatelessWidget {
 
         initialRoute: "/",
         routes: {
-          "/": (context) => LoginScreen(),
+          "/login": (context) => LoginScreen(),
+          "/": (context) => HomeScreen(),
+          "/re": (context) => RegisterScreen(),
         }
         // home: MyHomePage(title: 'Flutter Demo Home Page'),
         );
