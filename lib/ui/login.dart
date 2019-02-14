@@ -10,12 +10,15 @@ class LoginScreen extends StatefulWidget {
 }
 
 class Login extends State<LoginScreen> {
-  TextEditingController User_check = new TextEditingController();
-  TextEditingController Password_check = new TextEditingController();
+  final TextEditingController User_check = new TextEditingController();
+  final TextEditingController Password_check = new TextEditingController();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+        key: _scaffoldKey,
         resizeToAvoidBottomPadding: false,
         // appBar: AppBar(
         //   backgroundColor: Colors.transparent,
@@ -38,7 +41,7 @@ class Login extends State<LoginScreen> {
                       controller: User_check,
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.person),
-                        hintText: "User ID",
+                        hintText: "User Id",
                       ),
                     ),
                   ),
@@ -50,6 +53,7 @@ class Login extends State<LoginScreen> {
                         prefixIcon: Icon(Icons.lock),
                         hintText: "Password",
                       ),
+                      obscureText: true,
                     ),
                   ),
                   Padding(
@@ -58,12 +62,18 @@ class Login extends State<LoginScreen> {
                       minWidth: 300,
                       child: RaisedButton(
                           color: Colors.grey.shade300,
-                          child: Text("Login"),
+                          child: Text("LOGIN"),
                           onPressed: () {
                             if (User_check.text.isEmpty ||
                                 Password_check.text.isEmpty) {
-                            } else if (User_check == "admin" &&
-                                Password_check == "&&") {
+                              _scaffoldKey.currentState.showSnackBar(SnackBar(
+                                  content: Text('กรุณาระบุuser or password')));
+                            }
+                            else if (User_check.text == "admin" &&
+                                Password_check.text == "admin") {
+                              _scaffoldKey.currentState.showSnackBar(SnackBar(
+                                  content:
+                                      Text('“user or password ไม่ถูกต้อง”')));
                             } else {
                               Navigator.push(
                                   context,
@@ -82,7 +92,9 @@ class Login extends State<LoginScreen> {
                             MaterialPageRoute(
                                 builder: (context) => RegisterScreen()));
                       },
-                      child: Text("Register New Account"),
+                      child: Text(
+                        "Register New Account",
+                      ),
                       textColor: Colors.teal.shade500,
                     ),
                   ),

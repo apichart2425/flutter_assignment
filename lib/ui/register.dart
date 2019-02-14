@@ -13,19 +13,19 @@ class RegisterScreen extends StatefulWidget {
 class Register extends State<RegisterScreen> {
   TextEditingController Email_check = new TextEditingController();
   TextEditingController PrePassword_check = new TextEditingController();
-  TextEditingController Password_check = new TextEditingController();
-
+  TextEditingController RePassword_check = new TextEditingController();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Center(
       child: Scaffold(
+          key: _scaffoldKey,
           appBar: AppBar(
-            title: Text(
-              "Register",
-              textAlign: TextAlign.center,
-            ),
+            centerTitle: true,
+            title:
+                Text("REGISTER", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0,)),
           ),
           resizeToAvoidBottomPadding: false,
           body: Padding(
@@ -38,50 +38,73 @@ class Register extends State<RegisterScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 30.0),
                       child: TextField(
+                        style: TextStyle(color: Colors.blue),
                         controller: Email_check,
+                        keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.mail),
+                          prefixIcon: Icon(Icons.mail, color: Colors.blue),
                           hintText: "Email Address",
+                          hintStyle: TextStyle(color: Colors.blue),
+                          //เปลี่ยนสี เส้น
+                          enabledBorder: new UnderlineInputBorder(
+                              borderSide: new BorderSide(color: Colors.blue)),
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20.0),
-                      child: TextField(
-                        controller: PrePassword_check,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.lock),
-                          hintText: "Password",
-                        ),
+                    TextField(
+                      style: TextStyle(color: Colors.blue, fontSize: 30),
+                      controller: PrePassword_check,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.lock, color: Colors.blue),
+                        hintText: "Password",
+                        hintStyle: TextStyle(color: Colors.blue, fontSize: 15),
+                        enabledBorder: new UnderlineInputBorder(
+                            borderSide: new BorderSide(color: Colors.blue)),
                       ),
+                      obscureText: true,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20.0),
-                      child: TextField(
-                        controller: Password_check,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.lock),
-                          hintText: "Re-Password",
+                    TextField(
+                      style: TextStyle(color: Colors.blue, fontSize: 30),
+                      controller: RePassword_check,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.lock,
+                          color: Colors.blue,
                         ),
+                        hintText: "Re-Password",
+                        hintStyle: TextStyle(color: Colors.blue, fontSize: 15),
+                        enabledBorder: new UnderlineInputBorder(
+                            borderSide: new BorderSide(color: Colors.blue)),
                       ),
+                      obscureText: true,
                     ),
+                    SizedBox(height: 20,),
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0),
                       child: ButtonTheme(
-                        minWidth: 300,
+                        height: 50,
+                        minWidth: 400,
                         child: RaisedButton(
                             // color: Colors.grey.shade300,
-                            child: Text("CONTINUE"),
+                            child: Text(
+                              "CONTINUE",
+                              style: TextStyle(color: Colors.white),
+                            ),
                             onPressed: () {
                               if (Email_check.text.isEmpty ||
-                                  Password_check.text.isEmpty) {
-                              } else if (Email_check == "admin" &&
-                                  Password_check == "&&") {
+                                  PrePassword_check.text.isEmpty ||
+                                  RePassword_check.text.isEmpty) {
+                                _scaffoldKey.currentState.showSnackBar(SnackBar(
+                                    content:
+                                        Text('กรุณาระบุข้อมูลให้ครบถ้วน')));
+                              } else if (Email_check.text == "admin") {
+                                _scaffoldKey.currentState.showSnackBar(SnackBar(
+                                    content: Text('user นี้มีอยู่ในระบบแล้ว')));
                               } else {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => HomeScreen()));
+                                        builder: (context) => LoginScreen()));
                               }
                             }),
                       ),
@@ -94,35 +117,3 @@ class Register extends State<RegisterScreen> {
     );
   }
 }
-
-// Center(
-//         child: Form(
-//   child: ListView(
-//     children: <Widget>[
-//       Image.asset(
-//         "resource/img_food1.jpg",
-//         height: 150,
-//         width: 200,
-//       ),
-
-//       // id
-//       TextField(
-//         decoration: InputDecoration(
-//           prefixIcon: Icon(Icons.person),
-//           // labelText: "User ID",
-//           // hintText: "User ID",
-//         ),
-//       ),
-
-//       // password
-//       TextField(
-//         decoration: InputDecoration(
-//           icon: Icon(Icons.lock),
-//           labelText: "Password",
-//           hintText: "PASSWORD",
-//         ),
-//       ),
-//     ],
-//   ),
-// )
-// )
