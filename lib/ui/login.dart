@@ -33,7 +33,7 @@ class Login extends State<LoginScreen> {
                 children: <Widget>[
                   Image.asset(
                     "resource/img_food1.jpg",
-                    height: 150,
+                    height: 200,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 30.0),
@@ -73,7 +73,7 @@ class Login extends State<LoginScreen> {
                                 Password_check.text == "admin") {
                               _scaffoldKey.currentState.showSnackBar(SnackBar(
                                   content:
-                                      Text('“user or password ไม่ถูกต้อง”')));
+                                      Text('user or password ไม่ถูกต้อง')));
                             } else {
                               Navigator.push(
                                   context,
@@ -92,8 +92,11 @@ class Login extends State<LoginScreen> {
                             MaterialPageRoute(
                                 builder: (context) => RegisterScreen()));
                       },
-                      child: Text(
-                        "Register New Account",
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 60.0),
+                        child: Text(
+                          "Register New Account",
+                        ),
                       ),
                       textColor: Colors.teal.shade500,
                     ),
