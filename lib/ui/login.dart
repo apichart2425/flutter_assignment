@@ -68,8 +68,7 @@ class Login extends State<LoginScreen> {
                                 Password_check.text.isEmpty) {
                               _scaffoldKey.currentState.showSnackBar(SnackBar(
                                   content: Text('กรุณาระบุuser or password')));
-                            }
-                            else if (User_check.text == "admin" &&
+                            } else if (User_check.text == "admin" &&
                                 Password_check.text == "admin") {
                               _scaffoldKey.currentState.showSnackBar(SnackBar(
                                   content:
@@ -85,22 +84,40 @@ class Login extends State<LoginScreen> {
                   ),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: FlatButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => RegisterScreen()));
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 60.0),
-                        child: Text(
-                          "Register New Account",
+                    child: ButtonTheme(
+                      padding: EdgeInsets.all(0),
+                      child: FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => RegisterScreen()));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(0.0),
+                          child: Text(
+                            "Register New Account",
+                          ),
                         ),
+                        textColor: Colors.teal.shade500,
                       ),
-                      textColor: Colors.teal.shade500,
                     ),
                   ),
+                  // ButtonTheme(
+                  //   child: FlatButton(
+                  //     onPressed: () {
+                  //       Navigator.push(
+                  //           context,
+                  //           MaterialPageRoute(
+                  //               builder: (context) => RegisterScreen()));
+                  //     },
+                  //     padding: const EdgeInsets.only(left: 150.0),
+                  //     child: Text(
+                  //       "Register New Account",
+                  //     ),
+                  //     textColor: Colors.teal.shade500,
+                  //   ),
+                  // )
                 ],
               ),
             ),
